@@ -33,7 +33,8 @@ might I suggest this brief informational video:
 **Where am I now?**  
 It's really hard for me to answer that, 
 because I don't know what time you're reading this. 
-That said, I live in Medford, MA, 
+
+That said, I live just outside Boston, MA, 
 so there's a good chance I'm there right now.
 
 
@@ -50,11 +51,15 @@ So far, I've only been to a handful:
 - Spain
 - Germany
 - Italy 
-- and Prussia (I went through a time-traveling phase that I don't like to talk about).  
+- Prussia (I went through a time-traveling phase that I don't like to talk about).  
 
 But I do know that Where We're Going, We Don't Need Roads 
-(album by Dylan Davies coming soon to a streaming service near you).
-
+(album by Dylan Davies coming soon to a streaming service near you -
+stream the EP now on
+<a target="_blank" href="https://open.spotify.com/album/1xmiczRZB0L8cKwZukAKus?si=QUZsuQUfT365vPQssSg-7Q">Spotify</a>,
+<a target="_blank" href="https://tidal.com/album/492426032">Tidal</a>, or 
+<a target="_blank" href="https://music.apple.com/us/album/where-were-going-single/1871601443">Apple Music</a>
+).
 
 **What am I doing?**  
 Oh wow, I find myself asking this question every day.
@@ -68,3 +73,6 @@ to writing music,
 to playing video games with a vehicle in them,
 to eating great food,
 to playing video games where you hit a ball with a rocket-powered car.
+
+To find out about the more interesting things that I'm doing, check out
+<a href="/projects"> my silly little projects</a>.

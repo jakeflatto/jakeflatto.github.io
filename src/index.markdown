@@ -12,8 +12,9 @@ After 5 years of Software Engineering, I figured it's about damn time I had a pe
 </div>
 
 <div class="container">
-  <a class="custom-btn" href="/about">About Me &#128064;</a>
-  <a class="custom-btn" href="/interests">My Many, Varied Interests &#127928; &#129518; &#127909;</a>
-  <a class="custom-btn" href="/posts">Blog, i guess &#128397;</a>
+  <a class="custom-btn" href="/about">About Me<br> &#128064;</a>
+  <a class="custom-btn" href="/posts">Blog, i guess<br> &#128397;</a>
+  <a class="custom-btn" href="/interests">My Many, Varied Interests<br> &#127925; &#129518; &#127909;</a>
+  <a class="custom-btn" href="/projects">My Silly, Little Projects<br> &#128520; &#127789; &#127928;</a>
 </div>
 

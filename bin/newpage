@@ -7,7 +7,7 @@ title=""
 collections=()
 mode=""
 
-# Parse -t and -c arguments
+# Parse -t and optional -c arguments
 while [[ $# -gt 0 ]]; do
   case "$1" in
     -t)
@@ -29,8 +29,9 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$title" || ${#collections[@]} -eq 0 ]]; then
-  echo "Usage: newpage -t <title> -c <collection1> [collection2 ...]"
+# Only -t is required; -c is now optional
+if [[ -z "$title" ]]; then
+  echo "Usage: newpage -t <title> [-c <collection1> [collection2 ...]]"
   exit 1
 fi
 
@@ -48,26 +49,28 @@ cap_title=$(capitalize "$title")
 lower_title=$(echo "$title" | tr '[:upper:]' '[:lower:]')
 file_slug=$(echo "$lower_title" | tr ' ' '-')
 
-# Top-level collection name (e.g., "interests")
-top_col=$(echo "${collections}" | tr '[:upper:]' '[:lower:]')
-
-# Build directory path inside src/ and public URL breadcrumb links
-dir_path="${SRC_DIR}/_${top_col}"
+# Initialize paths and breadcrumbs for root-level vs. collection pages
+dir_path="${SRC_DIR}"
 url_path=""
 breadcrumbs='<a href="/">Home</a>'
 
-for i in "${!collections[@]}"; do
-  col="${collections[$i]}"
-  cap_col=$(capitalize "$col")
-  lower_col=$(echo "$col" | tr '[:upper:]' '[:lower:]')
+if [[ ${#collections[@]} -gt 0 ]]; then
+  top_col=$(echo "${collections}" | tr '[:upper:]' '[:lower:]')
+  dir_path="${SRC_DIR}/_${top_col}"
 
-  if [[ $i -gt 0 ]]; then
-    dir_path="${dir_path}/${lower_col}"
-  fi
+  for i in "${!collections[@]}"; do
+    col="${collections[$i]}"
+    cap_col=$(capitalize "$col")
+    lower_col=$(echo "$col" | tr '[:upper:]' '[:lower:]')
 
-  url_path="${url_path}/${lower_col}"
-  breadcrumbs="${breadcrumbs} > <a href=\"${url_path}\">${cap_col}</a>"
-done
+    if [[ $i -gt 0 ]]; then
+      dir_path="${dir_path}/${lower_col}"
+    fi
+
+    url_path="${url_path}/${lower_col}"
+    breadcrumbs="${breadcrumbs} > <a href=\"${url_path}\">${cap_col}</a>"
+  done
+fi
 
 breadcrumbs="${breadcrumbs} > <a href=\"#0\">${cap_title}</a>"
 file_path="${dir_path}/${file_slug}.markdown"
@@ -82,25 +85,27 @@ if [[ -f "$file_path" ]]; then
   fi
 fi
 
-# Register top-level collection in src/_config.yml if it exists
-if [[ -f "$CONFIG_FILE" ]]; then
-  if ! grep -q "^collections:" "$CONFIG_FILE"; then
-    printf "\ncollections:\n  %s:\n    output: true\n" "$top_col" >> "$CONFIG_FILE"
-    echo "Registered new collection '${top_col}' in ${CONFIG_FILE}"
-  elif ! grep -q "^  ${top_col}:" "$CONFIG_FILE"; then
-    awk -v col="$top_col" '
-      /^collections:/ {
-        print
-        print "  " col ":"
-        print "    output: true"
-        next
-      }
-      { print }
-    ' "$CONFIG_FILE" > "${CONFIG_FILE}.tmp" && mv "${CONFIG_FILE}.tmp" "$CONFIG_FILE"
-    echo "Registered new collection '${top_col}' in ${CONFIG_FILE}"
+# Register top-level collection in src/_config.yml only if -c was provided
+if [[ ${#collections[@]} -gt 0 ]]; then
+  if [[ -f "$CONFIG_FILE" ]]; then
+    if ! grep -q "^collections:" "$CONFIG_FILE"; then
+      printf "\ncollections:\n  %s:\n    output: true\n" "$top_col" >> "$CONFIG_FILE"
+      echo "Registered new collection '${top_col}' in ${CONFIG_FILE}"
+    elif ! grep -q "^  ${top_col}:" "$CONFIG_FILE"; then
+      awk -v col="$top_col" '
+        /^collections:/ {
+          print
+          print "  " col ":"
+          print "    output: true"
+          next
+        }
+        { print }
+      ' "$CONFIG_FILE" > "${CONFIG_FILE}.tmp" && mv "${CONFIG_FILE}.tmp" "$CONFIG_FILE"
+      echo "Registered new collection '${top_col}' in ${CONFIG_FILE}"
+    fi
+  else
+    echo "Warning: ${CONFIG_FILE} not found. Skipping collection registration."
   fi
-else
-  echo "Warning: ${CONFIG_FILE} not found. Skipping collection registration."
 fi
 
 # Create directories and write file
