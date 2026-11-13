@@ -1,0 +1,93 @@
+---
+---
+// 1. Header Colors (Gradient goes from secondary on the left to primary on the right)
+$header-heading-color: #fff;
+$header-bg-color: #048c8c;           // Default: #159957 (Right side of gradient)
+$header-bg-color-secondary: #7c0896; // Default: #155799 (Left side of gradient)
+
+// 2. Text & Link Colors
+$section-headings-color: #159957;    // Default: #159957 (h1, h2, h3, etc. in main content)
+$body-text-color: #606c71;           // Default: #606c71
+$body-link-color: #1e6bb8;           // Default: #1e6bb8
+$blockquote-text-color: #819198;     // Default: #819198
+
+// 3. Code Block Colors
+$code-bg-color: #f3f6fa;             // Default: #f3f6fa
+$code-text-color: #567482;           // Default: #567482
+
+// 4. Border Colors
+$border-color: #dce6f0;              // Default: #dce6f0
+$table-border-color: #e9ebec;        // Default: #e9ebec
+$hr-border-color: #eff0f1;           // Default: #eff0f1
+
+@import "{{ site.theme }}";
+
+.custom-btn {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  color: #048c8c;
+  background-color: transparent;
+  border: 1px solid $header-bg-color;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.custom-btn:hover {
+  color: #ffffff;
+  background-color: $header-bg-color;
+  text-decoration: none;
+}
+
+.img-container {
+  display: flex;
+  justify-content: space-around; /* Centers horizontally */
+  height: 300px;           /* Required for vertical centering */
+  margin-block: 25px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin-block: 25px;
+}
+
+/* 3-Column Button Grid */
+.button-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+/* Stack into 1 column on small mobile screens */
+@media (max-width: 600px) {
+  .button-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Updated Button Style for Grids */
+.grid-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1; /* Forces a 1:1 square shape */
+  padding: 1rem;
+  text-align: center;
+  color: #ffffff;
+  background-color: $header-bg-color;
+  border: 2px solid $header-bg-color;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.grid-btn:hover {
+  color: $header-bg-color;
+  background-color: transparent;
+  text-decoration: none;
+}

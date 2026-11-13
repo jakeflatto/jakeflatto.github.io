@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+
+SRC_DIR="src"
+CONFIG_FILE="${SRC_DIR}/_config.yml"
+
+title=""
+collections=()
+mode=""
+
+# Parse -t and -c arguments
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -t)
+      mode="title"
+      shift
+      ;;
+    -c)
+      mode="collections"
+      shift
+      ;;
+    *)
+      if [[ "$mode" == "title" ]]; then
+        title="${title:+$title }$1"
+      elif [[ "$mode" == "collections" ]]; then
+        collections+=("$1")
+      fi
+      shift
+      ;;
+  esac
+done
+
+if [[ -z "$title" || ${#collections[@]} -eq 0 ]]; then
+  echo "Usage: newpage -t <title> -c <collection1> [collection2 ...]"
+  exit 1
+fi
+
+# Verify we are running from the repo root where src/ exists
+if [[ ! -d "$SRC_DIR" ]]; then
+  echo "Error: '${SRC_DIR}/' directory not found. Please run this command from the repository root."
+  exit 1
+fi
+
+capitalize() {
+  echo "$1" | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1'
+}
+
+cap_title=$(capitalize "$title")
+lower_title=$(echo "$title" | tr '[:upper:]' '[:lower:]')
+file_slug=$(echo "$lower_title" | tr ' ' '-')
+
+# Top-level collection name (e.g., "interests")
+top_col=$(echo "${collections}" | tr '[:upper:]' '[:lower:]')
+
+# Build directory path inside src/ and public URL breadcrumb links
+dir_path="${SRC_DIR}/_${top_col}"
+url_path=""
+breadcrumbs='<a href="/">Home</a>'
+
+for i in "${!collections[@]}"; do
+  col="${collections[$i]}"
+  cap_col=$(capitalize "$col")
+  lower_col=$(echo "$col" | tr '[:upper:]' '[:lower:]')
+
+  if [[ $i -gt 0 ]]; then
+    dir_path="${dir_path}/${lower_col}"
+  fi
+
+  url_path="${url_path}/${lower_col}"
+  breadcrumbs="${breadcrumbs} > <a href=\"${url_path}\">${cap_col}</a>"
+done
+
+breadcrumbs="${breadcrumbs} > <a href=\"#0\">${cap_title}</a>"
+file_path="${dir_path}/${file_slug}.markdown"
+
+# Safety check: Prevent accidental overwrite
+if [[ -f "$file_path" ]]; then
+  printf "File '%s' already exists. Overwrite? [y/N]: " "$file_path"
+  read -r confirm
+  if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
+    echo "Aborted. Existing file was not modified."
+    exit 1
+  fi
+fi
+
+# Register top-level collection in src/_config.yml if it exists
+if [[ -f "$CONFIG_FILE" ]]; then
+  if ! grep -q "^collections:" "$CONFIG_FILE"; then
+    printf "\ncollections:\n  %s:\n    output: true\n" "$top_col" >> "$CONFIG_FILE"
+    echo "Registered new collection '${top_col}' in ${CONFIG_FILE}"
+  elif ! grep -q "^  ${top_col}:" "$CONFIG_FILE"; then
+    awk -v col="$top_col" '
+      /^collections:/ {
+        print
+        print "  " col ":"
+        print "    output: true"
+        next
+      }
+      { print }
+    ' "$CONFIG_FILE" > "${CONFIG_FILE}.tmp" && mv "${CONFIG_FILE}.tmp" "$CONFIG_FILE"
+    echo "Registered new collection '${top_col}' in ${CONFIG_FILE}"
+  fi
+else
+  echo "Warning: ${CONFIG_FILE} not found. Skipping collection registration."
+fi
+
+# Create directories and write file
+mkdir -p "$dir_path"
+
+cat <<EOF > "$file_path"
+---
+layout: default
+title: ${cap_title}
+---
+<div>
+  ${breadcrumbs}
+</div>
+
+It's the ${lower_title} page! Content coming soon.
+EOF
+
+echo "Created: $file_path"
+
