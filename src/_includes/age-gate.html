@@ -1,0 +1,34 @@
+{% assign min_age = include.age | default: 18 %}
+{% assign gate_key = include.key | default: "site_age_verified" %}
+
+<div id="age-gate" class="age-gate-overlay" role="dialog" aria-modal="true" aria-labelledby="age-gate-title">
+  <div class="age-gate-box">
+    <h2 id="age-gate-title">Age Verification Required</h2>
+    <p>This page contains content intended for adults ({{ min_age }}+). Please confirm your age to continue.</p>
+    <div class="age-gate-actions">
+      <button type="button" id="age-confirm-btn" class="custom-btn">I am {{ min_age }} or older</button>
+      <a href="{{ '/' | relative_url }}" class="age-exit-link">Take me back</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const gate = document.getElementById("age-gate");
+    const confirmBtn = document.getElementById("age-confirm-btn");
+    const storageKey = "{{ gate_key }}";
+
+    if (sessionStorage.getItem(storageKey) === "true") {
+      gate.style.display = "none";
+    } else {
+      document.body.style.overflow = "hidden";
+    }
+
+    confirmBtn.addEventListener("click", function () {
+      sessionStorage.setItem(storageKey, "true");
+      gate.style.display = "none";
+      document.body.style.overflow = "";
+    });
+  })();
+</script>
+

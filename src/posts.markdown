@@ -9,7 +9,9 @@ What's a personal website without a Blog, i guess?
 No idea how often I will actually intend to post here. 
 But one thing I like about the idea of having a blog on my page is: 
 it allows me to broadcast ideas without the use of traditional social media.
+
 And you certainly won't find any references to traditional social media anywhere on my site.
+Definitely not at the bottom of this or any other page.
 
 **Posts**
 {% if site.posts.size == 0 %}

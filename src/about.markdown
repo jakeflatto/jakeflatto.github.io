@@ -11,12 +11,12 @@ permalink: /about/
   <img src="/assets/images/jake_singing.jpg" alt="Jake scream singing his heart out">
 </div>
 
-There's lots to know about me, and below I've answered only the most important questions so you can learn quickly.
+There's lots to know about me! Below I've concisely answered only the most important questions so you can learn quickly.
 
 **Where am I from?**  
 I was *born* in San Francisco, CA, 
 and lived there (Sunset District) until I was 7, 
-when we moved to Santa Rosa, CA. 
+when my family moved to Santa Rosa, CA. 
 
 But in order to truly answer this question, 
 might I suggest this brief informational video:
@@ -53,13 +53,12 @@ So far, I've only been to a handful:
 - Italy 
 - Prussia (I went through a time-traveling phase that I don't like to talk about).  
 
-But I do know that Where We're Going, We Don't Need Roads 
+I may not know where I'm going, but I do know that Where We're Going, We Don't Need Roads 
 (album by Dylan Davies coming soon to a streaming service near you -
 stream the EP now on
 <a target="_blank" href="https://open.spotify.com/album/1xmiczRZB0L8cKwZukAKus?si=QUZsuQUfT365vPQssSg-7Q">Spotify</a>,
 <a target="_blank" href="https://tidal.com/album/492426032">Tidal</a>, or 
-<a target="_blank" href="https://music.apple.com/us/album/where-were-going-single/1871601443">Apple Music</a>
-).
+<a target="_blank" href="https://music.apple.com/us/album/where-were-going-single/1871601443">Apple Music</a>).
 
 **What am I doing?**  
 Oh wow, I find myself asking this question every day.
@@ -76,3 +75,6 @@ to playing video games where you hit a ball with a rocket-powered car.
 
 To find out about the more interesting things that I'm doing, check out
 <a href="/projects"> my silly little projects</a>.
+
+**What is the airspeed velocity of an unladen swallow?**   
+African or European?

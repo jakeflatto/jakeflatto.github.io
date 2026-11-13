@@ -199,3 +199,98 @@ $hr-border-color: #eff0f1;           // Default: #eff0f1
   }
 }
 
+/* Footer Social Media Links */
+$social-icon-size: 40px;
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: 1.25rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $body-text-color;
+    transition: color 0.2s, transform 0.2s;
+
+    &:hover {
+      color: $header-bg-color-secondary;
+      transform: translateY(-2px);
+    }
+  }
+
+  svg {
+    width: $social-icon-size;
+    height: $social-icon-size;
+    display: block;
+
+    @media (max-width: 480px) {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+/* Age Verification Overlay */
+.age-gate-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.age-gate-box {
+  width: 100%;
+  max-width: 460px;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  background-color: #ffffff;
+  border: 2px solid $header-bg-color;
+  border-radius: 0.75rem;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+
+  h2 {
+    margin-top: 0;
+    color: $header-bg-color;
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    color: $body-text-color;
+  }
+}
+
+.age-gate-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+
+  .custom-btn {
+    width: 100%;
+    max-width: 260px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+}
+
+.age-exit-link {
+  font-size: 0.9rem;
+  color: $blockquote-text-color;
+  text-decoration: underline;
+
+  &:hover {
+    color: $header-bg-color;
+  }
+}
+

@@ -8,7 +8,9 @@
 </div>
 
 <div>
-After 5 years of Software Engineering, I figured it's about damn time I had a personal website. Learn about me and my many, varied interests below!
+After 5 years of Software Engineering, 
+I figured it's about damn time I had a personal website. 
+Learn about me and my many, varied interests as well as my silly, little projects below!
 </div>
 
 <div class="container">
