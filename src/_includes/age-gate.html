@@ -7,7 +7,7 @@
     <p>This page contains content intended for adults ({{ min_age }}+). Please confirm your age to continue.</p>
     <div class="age-gate-actions">
       <button type="button" id="age-confirm-btn" class="custom-btn">I am {{ min_age }} or older</button>
-      <a href="{{ '/' | relative_url }}" class="age-exit-link">Take me back</a>
+      <a href="{{ '/' | relative_url }}" id="age-exit-link" class="age-exit-link">Take me back</a>
     </div>
   </div>
 </div>
@@ -16,6 +16,7 @@
   (function () {
     const gate = document.getElementById("age-gate");
     const confirmBtn = document.getElementById("age-confirm-btn");
+    const exitLink = document.getElementById("age-exit-link");
     const storageKey = "{{ gate_key }}";
 
     if (sessionStorage.getItem(storageKey) === "true") {
@@ -28,6 +29,13 @@
       sessionStorage.setItem(storageKey, "true");
       gate.style.display = "none";
       document.body.style.overflow = "";
+    });
+
+    exitLink.addEventListener("click", function (event) {
+      if (document.referrer && window.history.length > 1) {
+        event.preventDefault();
+        window.history.back();
+      }
     });
   })();
 </script>
