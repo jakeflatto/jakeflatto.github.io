@@ -12,4 +12,4 @@ It's the Hollywood Hang Dong Challenge page! More info coming soon, but feel fre
 **Warning**  
 NSFW content ahead, marked as such for being s\*xually sugg\*stive. Proceed at your own risk!
 
-{% include hhdc-social.html %}
+{% include social-group.html prefix="hhdc_" %}

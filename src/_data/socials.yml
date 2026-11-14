@@ -1,0 +1,47 @@
+# Site-wide footer accounts
+linkedin:
+  platform: linkedin
+  url: https://linkedin.com/in/jakeflatto/
+  footer: true
+instagram:
+  platform: instagram
+  url: https://instagram.com/flying.purple.sushi.eater/
+  footer: true
+github:
+  platform: github
+  url: https://github.com/jakeflatto
+  footer: true
+
+# Dylan Davies accounts
+dd_instagram:
+  platform: instagram
+  url: https://instagram.com/this.is.dylan.davies/
+dd_spotify:
+  platform: spotify
+  url: https://open.spotify.com/artist/6XZnoJZ0S65hOSc7WfAP7A?si=yiB2XFmwSf2iRp6LV2HGfA
+dd_tidal:
+  platform: tidal
+  url: https://tidal.com/artist/76176452
+dd_apple_music:
+  platform: apple_music
+  url: https://music.apple.com/us/artist/dylan-davies/1871600781
+
+# Theory of Solids accounts
+tos_instagram:
+  platform: instagram
+  url: https://www.instagram.com/theoryofsolids/
+tos_facebook:
+  platform: facebook
+  url: https://www.facebook.com/theoryofsolids
+tos_venmo:
+  platform: venmo
+  url: https://account.venmo.com/u/theoryofsolids
+tos_youtube:
+  platform: youtube
+  url: https://www.youtube.com/@TheoryOfSolids
+
+# HHDC accounts
+hhdc_bluesky:
+  platform: bluesky
+  url: https://bsky.app/profile/hollywoodhangdong.bsky.social
+

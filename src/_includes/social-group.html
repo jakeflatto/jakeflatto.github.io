@@ -1,0 +1,20 @@
+{% if site.data.socials %}
+<div class="social-links">
+  {% for item in site.data.socials %}
+    {% assign entry_key = item[0] %}
+    {% assign entry_data = item[1] %}
+
+    {% if include.prefix %}
+      {% assign key_prefix = entry_key | slice: 0, include.prefix.size %}
+      {% if key_prefix == include.prefix %}
+        {% include social-link.html name=entry_key %}
+      {% endif %}
+    {% elsif include.footer %}
+      {% if entry_data.footer %}
+        {% include social-link.html name=entry_key %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
+{% endif %}
+

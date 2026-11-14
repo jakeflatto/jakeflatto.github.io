@@ -8,4 +8,4 @@ title: Dylan Davies
 
 It's the Dylan Davies page! Content coming soon, but for now check out the streams and socials below!
 
-{% include dylan-davies-socials.html %}
+{% include social-group.html prefix="dd_" %}

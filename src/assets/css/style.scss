@@ -91,6 +91,11 @@ $hr-border-color: #eff0f1;           // Default: #eff0f1
   height: auto;
   object-fit: contain;
   border-radius: 0.4rem;
+
+  /* Modifier for larger single images */
+  &.large {
+    max-height: 500px;
+  }
 }
 
 /* Multiple images inside .img-container (e.g., About Me 3-photo row): uniform side-by-side row */

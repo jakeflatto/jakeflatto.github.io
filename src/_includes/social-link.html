@@ -1,0 +1,13 @@
+{% assign entry = site.data.socials[include.name] %}
+{% assign platform = include.platform | default: entry.platform %}
+{% assign link_url = include.url | default: entry.url %}
+{% assign icon = site.data.social_icons[platform] %}
+
+{% if link_url and icon %}
+<a href="{{ link_url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ icon.label }}" title="{{ icon.label }}">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="{{ icon.path }}"/>
+  </svg>
+</a>
+{% endif %}
+
