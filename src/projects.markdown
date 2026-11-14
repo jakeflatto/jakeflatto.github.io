@@ -8,7 +8,11 @@ title:  "My Silly, Little Projects"
     {% for project in site.projects %}
       {% assign path_parts = project.relative_path | split: "/" %}
       {% if path_parts.size == 2 %}
-        <a href="{{ project.url }}" class="grid-btn">{{ project.title }}</a>
+        <a href="{{ project.url | relative_url }}"
+           class="grid-btn{% if project.image %} has-cover{% endif %}"
+           {% if project.image %}style="--cover-img: url('{{ project.image | relative_url }}');"{% endif %}>
+          <span class="grid-btn-label">{{ project.title | default: project.slug }}</span>
+        </a>
       {% endif %}  
     {% endfor %}
 </div>
