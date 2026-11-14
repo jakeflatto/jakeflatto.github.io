@@ -23,7 +23,39 @@
 
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
-      <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+      {% assign resolved_description = page.description %}
+
+      {% unless resolved_description %}
+        {% assign all_docs = site.pages | concat: site.documents %}
+        {% assign url_segments = page.url | remove: ".html" | split: "/" %}
+        {% assign depth = url_segments.size | minus: 1 %}
+
+        {% for i in (1..depth) reversed %}
+          {% assign parent_path = "" %}
+          {% for j in (1..i) %}
+            {% assign seg = url_segments[j] %}
+            {% if seg != "" %}
+              {% assign parent_path = parent_path | append: "/" | append: seg %}
+            {% endif %}
+          {% endfor %}
+
+          {% if parent_path != "" and parent_path != page.url %}
+            {% for doc in all_docs %}
+              {% assign doc_clean_url = doc.url | remove: ".html" | remove_last: "/" %}
+              {% if doc_clean_url == parent_path and doc.description %}
+                {% assign resolved_description = doc.description %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+          {% if resolved_description %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+
+      <h2 class="project-tagline">{{ resolved_description | default: site.description | default: site.github.project_tagline }}</h2>
       {% if site.show_downloads %}
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>

@@ -1,5 +1,6 @@
 ---
 title: About Me
+description: Learn it all! Then take the quiz for a small fee
 permalink: /about/
 ---
 <div>

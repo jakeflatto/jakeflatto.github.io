@@ -1,5 +1,6 @@
 ---
 title:  "Blog, i guess"
+description: Disclaimer - contains less legal advice than the Bob Loblaw Law Blog
 ---
 <div>
   <a href="/">Home</a> > <a href="#0">Blog, i guess</a>

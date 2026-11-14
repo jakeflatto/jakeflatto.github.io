@@ -1,0 +1,27 @@
+{% assign col_name = include.collection %}
+{% assign items = site[col_name] %}
+
+{% if include.subpath and include.subpath != "" %}
+  {% assign base_prefix = "_" | append: col_name | append: "/" | append: include.subpath | append: "/" %}
+{% else %}
+  {% assign base_prefix = "_" | append: col_name | append: "/" %}
+{% endif %}
+
+{% assign prefix_parts = base_prefix | split: "/" %}
+{% assign target_depth = prefix_parts.size | plus: 1 %}
+
+<div class="button-grid">
+  {% for item in items %}
+    {% if item.url != page.url %}
+      {% assign path_parts = item.relative_path | split: "/" %}
+      {% if path_parts.size == target_depth and item.relative_path contains base_prefix %}
+        <a href="{{ item.url | relative_url }}"
+           class="grid-btn{% if item.image %} has-cover{% endif %}"
+           {% if item.image %}style="--cover-img: url('{{ item.image | relative_url }}');"{% endif %}>
+          <span class="grid-btn-label">{{ item.title | default: item.slug }}</span>
+        </a>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
+
