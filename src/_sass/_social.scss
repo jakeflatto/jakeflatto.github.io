@@ -1,0 +1,33 @@
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 3vw, 1.5rem);
+  margin-bottom: 1.25rem;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $body-text-color;
+    transition: color 0.2s, transform 0.2s;
+
+    &:hover {
+      color: $header-bg-color-secondary;
+      transform: translateY(-2px);
+    }
+  }
+
+  svg {
+    width: $social-icon-size;
+    height: $social-icon-size;
+    display: block;
+
+    @media (max-width: 480px) {
+      width: $social-icon-size-mobile;
+      height: $social-icon-size-mobile;
+    }
+  }
+}
+

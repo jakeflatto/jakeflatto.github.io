@@ -1,0 +1,73 @@
+/* Shared Media Defaults */
+.img-container img,
+.main-content > p > img,
+.main-content > img,
+.main-content iframe {
+  max-width: 100%;
+  border-radius: 0.4rem;
+}
+
+/* Responsive Image Container */
+.img-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  margin-block: clamp(1rem, 3vw, 1.5625rem);
+
+  /* Single image: never crops vertically */
+  img:only-child {
+    max-height: 360px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+
+    &.large {
+      max-height: 500px;
+    }
+  }
+
+  /* Multiple images (2 or 3): 1 row on desktop, uncropped */
+  img:not(:only-child) {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+
+    img:not(:only-child) {
+      flex: 1 1 100%;
+      max-height: 380px;
+    }
+  }
+}
+
+/* Standalone Images Outside .img-container */
+.main-content > p > img,
+.main-content > img {
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
+/* Responsive YouTube / Video Embeds */
+.main-content iframe {
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border: none;
+}
+
